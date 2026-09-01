@@ -1,0 +1,767 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Global Reset & Box Sizing */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Landing Page Styles */
+.landingPageContainer {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.backgroundVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.videoOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(10, 10, 15, 0.7) 0%, rgba(10, 10, 15, 0.85) 100%);
+  z-index: -1;
+}
+
+.landingPageContainer nav {
+  padding-inline: clamp(1.2rem, 5vw, 4rem);
+  padding-block: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  z-index: 10;
+}
+
+.landingPageContainer nav h2 {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+.landingPageContainer nav .navlist {
+  display: flex;
+  gap: clamp(1rem, 2.5vw, 2.2rem);
+  align-items: center;
+  cursor: pointer;
+}
+
+.landingPageContainer nav .navlist p {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.landingPageContainer nav .navlist p:hover {
+  color: #FF9839;
+}
+
+.landingPageContainer nav .navlist div[role='button'] {
+  border: 1px solid #FF9839;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.landingPageContainer nav .navlist div[role='button']:hover {
+  background: #FF9839;
+}
+
+.landingPageContainer nav .navlist div[role='button']:hover p {
+  color: white;
+}
+
+.landingMainContainer {
+  display: flex;
+  justify-content: space-between;
+  padding-inline: clamp(1.5rem, 6vw, 6rem);
+  padding-block: 2rem;
+  flex: 1;
+  min-height: calc(100vh - 80px);
+  min-height: calc(100dvh - 80px);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.landingMainContainer > div:nth-child(1) {
+  flex: 1;
+  max-width: 600px;
+}
+
+.landingMainContainer h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  letter-spacing: -1px;
+}
+
+.landingMainContainer p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+.landingMainContainer div[role='button'].getStartedBtn {
+  background: linear-gradient(135deg, #FF9839 0%, #D97500 100%);
+  width: fit-content;
+  padding: 0.9rem 2.2rem;
+  border-radius: 30px;
+  box-shadow: 0 4px 15px rgba(255, 152, 57, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.landingMainContainer div[role='button'].getStartedBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 152, 57, 0.5);
+}
+
+.landingMainContainer div[role='button'].getStartedBtn a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.landingMainContainer > div:nth-child(2) {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landingMainContainer > div:nth-child(2) img {
+  max-height: 50vh;
+  max-width: 100%;
+  width: auto;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.5s ease;
+}
+
+.landingMainContainer > div:nth-child(2) img:hover {
+  transform: scale(1.02);
+}
+
+/* Home Page Styles */
+.homeContainer {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: linear-gradient(135deg, rgba(10, 10, 15, 0.75) 0%, rgba(10, 10, 15, 0.9) 100%), url("./homepage.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.homeContainer .navBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: clamp(1.2rem, 5vw, 4rem);
+  padding-block: 1.2rem;
+  background: rgba(10, 10, 15, 0.5);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+}
+
+.homeContainer .navBar h2 {
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.homeContainer .navBar .historySection {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.homeContainer .navBar .historySection:hover {
+  color: #FF9839;
+}
+
+.homeContainer .meetContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: clamp(1.5rem, 6vw, 6rem);
+  padding-block: 2rem;
+  flex: 1;
+  min-height: calc(100vh - 80px);
+  min-height: calc(100dvh - 80px);
+  gap: clamp(2rem, 5vw, 6rem);
+}
+
+.homeContainer .leftPanel {
+  flex: 1.2;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.homeContainer .leftPanelCard {
+  background: rgba(20, 20, 30, 0.45);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: clamp(1.8rem, 4vw, 3.5rem) clamp(1.5rem, 3vw, 3rem);
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 580px;
+}
+
+.homeContainer .leftPanelCard h2 {
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 2rem;
+  color: white;
+  letter-spacing: -0.5px;
+}
+
+.homeContainer .meetInputs {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.homeContainer .rightPanel {
+  flex: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.homeContainer .rightPanel img {
+  width: clamp(200px, 28vw, 380px);
+  max-width: 100%;
+  height: auto;
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease;
+}
+
+.homeContainer .rightPanel img:hover {
+  transform: translateY(-5px);
+}
+
+/* Autofill override */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: white !important;
+  -webkit-box-shadow: 0 0 0px 1000px #000000 inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Video Meet & Lobby Styles */
+.lobbyContainer {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: linear-gradient(135deg, rgba(10, 10, 15, 0.75) 0%, rgba(10, 10, 15, 0.9) 100%), url("./homepage.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.lobbyCard {
+  background: rgba(20, 20, 30, 0.55);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  max-width: 850px;
+  display: flex;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+}
+
+.lobbyLeft {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.lobbyLeft h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.5px;
+}
+
+.lobbyRight {
+  flex: 1.2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.webcamPreview {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  aspect-ratio: 16/9;
+  background: #000;
+}
+
+.webcamPreview video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.liveBadge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: #FF3B30;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(255, 59, 48, 0.4);
+}
+
+/* Meeting Room Global Styles */
+.meetVideoContainer {
+  position: relative;
+  height: 100vh;
+  height: 100dvh;
+  width: 100vw;
+  width: 100dvw;
+  background: #0a0a0f;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+.meetUserVideo {
+  position: absolute;
+  bottom: clamp(80px, 10vh, 90px);
+  right: clamp(12px, 3vw, 30px);
+  height: clamp(110px, 20vh, 160px);
+  width: clamp(140px, 25vw, 240px);
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  z-index: 7;
+  transform: scaleX(-1);
+  transition: all 0.3s ease;
+}
+
+.buttonContainers {
+  position: absolute;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: clamp(0.5rem, 2vw, 1.2rem);
+  z-index: 10;
+  background: rgba(15, 15, 25, 0.85);
+  backdrop-filter: blur(16px);
+  padding: 8px 18px;
+  border-radius: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+  max-width: 95vw;
+}
+
+.buttonContainers.showControls {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.buttonContainers.hideControls {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(20px);
+}
+
+.buttonContainers button {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  width: clamp(42px, 10vw, 52px);
+  height: clamp(42px, 10vw, 52px);
+  min-width: 42px;
+  min-height: 42px;
+  transition: all 0.2s ease !important;
+}
+
+.buttonContainers button:hover {
+  background: rgba(255, 152, 57, 0.25) !important;
+  color: #FF9839 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 152, 57, 0.3);
+}
+
+.conferenceView { 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #0a0a0f;
+}
+
+.singleVideoContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+
+.singleVideoContainer video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+.multipleVideoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(10px, 2vw, 20px);
+  padding: clamp(10px, 3vw, 30px);
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  align-items: center;
+  justify-items: center;
+}
+
+.multipleVideoGrid > div {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #111;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.multipleVideoGrid video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+.chatRoom {
+  position: absolute;
+  height: calc(100% - 140px);
+  top: 30px;
+  right: 30px;
+  background: rgba(20, 20, 30, 0.85);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  width: 360px;
+  padding: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  color: white;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.chatHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.chatHeader h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0;
+  color: white;
+}
+
+.chatCloseBtn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chattingDisplay {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 1.2rem;
+  padding-right: 5px;
+}
+
+.chattingDisplay::-webkit-scrollbar {
+  width: 5px;
+}
+.chattingDisplay::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.chattingArea {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* History Page Custom Layout */
+.historyContainer {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  background: linear-gradient(135deg, rgba(10, 10, 15, 0.9) 0%, rgba(10, 10, 15, 0.95) 100%), url("./homepage.jpeg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.historyHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.historyHeader h1 {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  margin: 0;
+  color: white;
+}
+
+.historyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.historyCard {
+  background: rgba(20, 20, 30, 0.6) !important;
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 16px !important;
+  color: white !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+  transition: transform 0.2s ease, border-color 0.2s ease !important;
+}
+
+.historyCard:hover {
+  transform: translateY(-3px);
+  border-color: #FF9839 !important;
+}
+
+/* Media Queries for Tablet and Mobile Responsiveness */
+
+@media (max-width: 900px) {
+  .landingMainContainer {
+    flex-direction: column-reverse;
+    justify-content: center;
+    text-align: center;
+    gap: 2rem;
+    padding-block: 2rem;
+  }
+
+  .landingMainContainer div[role='button'].getStartedBtn {
+    margin: 0 auto;
+  }
+
+  .homeContainer .meetContainer {
+    flex-direction: column-reverse;
+    justify-content: center;
+    gap: 2.5rem;
+    padding-block: 2rem;
+  }
+
+  .homeContainer .leftPanelCard {
+    text-align: center;
+  }
+
+  .homeContainer .meetInputs {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .landingPageContainer nav {
+    padding-inline: 1.2rem;
+  }
+  
+  .homeContainer .navBar {
+    padding-inline: 1.2rem;
+  }
+
+  .lobbyCard {
+    flex-direction: column-reverse;
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  /* Transform Chat Room into Mobile Bottom Sheet Drawer */
+  .chatRoom {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 70vh;
+    height: 70dvh;
+    border-radius: 24px 24px 0 0;
+    z-index: 25;
+    padding: 1.5rem;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.8);
+    border-bottom: none;
+  }
+
+  .chatCloseBtn {
+    display: block;
+  }
+
+  .meetUserVideo {
+    width: 110px;
+    height: 150px;
+    bottom: 85px;
+    right: 15px;
+    border-radius: 12px;
+  }
+
+  .buttonContainers {
+    padding: 8px 12px;
+    gap: 8px;
+    bottom: max(15px, env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 480px) {
+  .landingPageContainer nav .navlist {
+    gap: 0.8rem;
+  }
+
+  .homeContainer .meetInputs {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .homeContainer .meetInputs > * {
+    width: 100% !important;
+  }
+
+  .multipleVideoGrid {
+    grid-template-columns: 1fr;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .meetUserVideo {
+    width: 95px;
+    height: 130px;
+    bottom: 80px;
+    right: 10px;
+  }
+}
