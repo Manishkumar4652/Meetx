@@ -4,6 +4,18 @@ A full-stack, real-time video conferencing web application built with **React**,
 
 ---
 
+## 🌐 Live Demo
+
+🔗 **Live Website:** [https://meetx-frontend-t55y.onrender.com](https://meetx-frontend-t55y.onrender.com)
+
+---
+
+## 📸 Preview / Screenshot
+
+![MeetX Application Preview](frontend/public/screenshot.png)
+
+---
+
 ## 🚀 Key Features
 
 * **Real-time Video & Audio Call:** Peer-to-peer connection for smooth video/audio streams.
