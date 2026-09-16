@@ -58,6 +58,20 @@ export default function VideoMeetComponent() {
 
     let [videos, setVideos] = useState([])
 
+    // Remote video elements are used only for the picture. Incoming audio is
+    // played by a dedicated audio element below, which avoids browser
+    // autoplay and re-render timing issues silencing the other participant.
+    const attachRemoteAudio = (element, stream) => {
+        if (!element || !stream || element.srcObject === stream) return;
+
+        element.srcObject = stream;
+        const play = () => element.play().catch((error) => {
+            console.log("Remote audio is waiting for browser playback permission:", error);
+        });
+        element.oncanplay = play;
+        play();
+    };
+
     let [showControls, setShowControls] = useState(true);
     let controlsTimeoutRef = useRef(null);
 
@@ -100,29 +114,26 @@ export default function VideoMeetComponent() {
         }
     }
 
-    // Push a freshly-obtained local stream's tracks into every peer
-    // connection that already exists. This fixes the race where a peer
-    // connection gets created (and sent a silent/black placeholder track)
-    // BEFORE getUserMedia() actually resolves — without this, the real mic
-    // audio would never reach other participants even after the permission
-    // popup was accepted, since only window.localStream / the local preview
-    // got updated and the already-sent placeholder track was never swapped.
+    // A participant can click Connect before the microphone permission prompt
+    // resolves. In that case the peer connection initially gets silent tracks.
+    // Replace those tracks as soon as the real camera/mic stream is available.
     const updateTracksInAllConnections = (stream) => {
-        for (let id in connections) {
+        for (const id in connections) {
             if (id === socketIdRef.current) continue;
 
-            if (connections[id].getSenders) {
-                let senders = connections[id].getSenders();
-                stream.getTracks().forEach(track => {
-                    let sender = senders.find(s => s.track && s.track.kind === track.kind);
+            const connection = connections[id];
+            if (connection.getSenders) {
+                const senders = connection.getSenders();
+                stream.getTracks().forEach((track) => {
+                    const sender = senders.find((item) => item.track && item.track.kind === track.kind);
                     if (sender) {
-                        sender.replaceTrack(track);
+                        sender.replaceTrack(track).catch((error) => console.log(error));
                     } else {
-                        connections[id].addTrack(track, stream);
+                        connection.addTrack(track, stream);
                     }
                 });
-            } else if (connections[id].addStream) {
-                connections[id].addStream(stream);
+            } else if (connection.addStream) {
+                connection.addStream(stream);
             }
         }
     };
@@ -272,7 +283,11 @@ export default function VideoMeetComponent() {
             socketRef.current.on('chat-message', addMessage)
 
             socketRef.current.on('user-left', (id) => {
-                setVideos((videos) => videos.filter((video) => video.socketId !== id))
+                setVideos((videos) => {
+                    const updatedVideos = videos.filter((video) => video.socketId !== id);
+                    videoRef.current = updatedVideos;
+                    return updatedVideos;
+                })
                 if (connections[id]) {
                     try {
                         connections[id].close();
@@ -580,6 +595,7 @@ export default function VideoMeetComponent() {
                                         }
                                     }}
                                     autoPlay
+                                    muted
                                     playsInline
                                 ></video>
                             </div>
@@ -598,6 +614,7 @@ export default function VideoMeetComponent() {
                                                 }
                                             }}
                                             autoPlay
+                                            muted
                                             playsInline
                                         ></video>
                                     </div>
@@ -605,6 +622,15 @@ export default function VideoMeetComponent() {
                             </div>
                         )}
                     </div>
+
+                    {videos.map((remoteVideo) => (
+                        <audio
+                            key={`audio-${remoteVideo.socketId}`}
+                            autoPlay
+                            playsInline
+                            ref={(element) => attachRemoteAudio(element, remoteVideo.stream)}
+                        />
+                    ))}
 
                     {videos.length > 0 && (
                         <video
