@@ -100,6 +100,33 @@ export default function VideoMeetComponent() {
         }
     }
 
+    // Push a freshly-obtained local stream's tracks into every peer
+    // connection that already exists. This fixes the race where a peer
+    // connection gets created (and sent a silent/black placeholder track)
+    // BEFORE getUserMedia() actually resolves — without this, the real mic
+    // audio would never reach other participants even after the permission
+    // popup was accepted, since only window.localStream / the local preview
+    // got updated and the already-sent placeholder track was never swapped.
+    const updateTracksInAllConnections = (stream) => {
+        for (let id in connections) {
+            if (id === socketIdRef.current) continue;
+
+            if (connections[id].getSenders) {
+                let senders = connections[id].getSenders();
+                stream.getTracks().forEach(track => {
+                    let sender = senders.find(s => s.track && s.track.kind === track.kind);
+                    if (sender) {
+                        sender.replaceTrack(track);
+                    } else {
+                        connections[id].addTrack(track, stream);
+                    }
+                });
+            } else if (connections[id].addStream) {
+                connections[id].addStream(stream);
+            }
+        }
+    };
+
     const getPermissions = async () => {
         try {
             const userMediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
@@ -112,6 +139,7 @@ export default function VideoMeetComponent() {
                 if (localVideoref.current) {
                     localVideoref.current.srcObject = userMediaStream;
                 }
+                updateTracksInAllConnections(userMediaStream);
             }
         } catch (error) {
             console.log("Failed to get both video & audio", error);
@@ -125,6 +153,7 @@ export default function VideoMeetComponent() {
                 if (localVideoref.current) {
                     localVideoref.current.srcObject = userMediaStream;
                 }
+                updateTracksInAllConnections(userMediaStream);
             } catch (err1) {
                 try {
                     const userMediaStream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
@@ -133,6 +162,7 @@ export default function VideoMeetComponent() {
                     setVideo(false);
                     setAudio(true);
                     window.localStream = userMediaStream;
+                    updateTracksInAllConnections(userMediaStream);
                 } catch (err2) {
                     setVideoAvailable(false);
                     setAudioAvailable(false);
